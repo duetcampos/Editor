@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>621</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>801</width>
+      <height>581</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuNew">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_As"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrint"/>
+    <addaction name="actionPrint_Preview"/>
+    <addaction name="actionExport_PDF"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionCopy"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+   </widget>
+   <widget class="QMenu" name="menuFormat">
+    <property name="title">
+     <string>Format</string>
+    </property>
+    <addaction name="actionFont"/>
+    <addaction name="actionColor"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuStyle">
+    <property name="title">
+     <string>Style</string>
+    </property>
+    <addaction name="actionBold"/>
+    <addaction name="actionItalic"/>
+    <addaction name="actionUnderline"/>
+    <addaction name="separator"/>
+    <addaction name="actionLeft"/>
+    <addaction name="actionCenter"/>
+    <addaction name="actionRight"/>
+    <addaction name="actionJustify"/>
+   </widget>
+   <widget class="QMenu" name="menuTime_And_Date">
+    <property name="title">
+     <string>Time And Date</string>
+    </property>
+    <addaction name="actionTime"/>
+    <addaction name="actionDate"/>
+   </widget>
+   <widget class="QMenu" name="menuText_Highlighter">
+    <property name="title">
+     <string>Text Highlighter</string>
+    </property>
+    <addaction name="actionText_Highlight"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
+   <addaction name="menuNew"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuFormat"/>
+   <addaction name="menuStyle"/>
+   <addaction name="menuTime_And_Date"/>
+   <addaction name="menuText_Highlighter"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="floatable">
+    <bool>true</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+   <addaction name="actionSave_As"/>
+   <addaction name="actionPrint"/>
+   <addaction name="actionPrint_Preview"/>
+   <addaction name="actionExport_PDF"/>
+   <addaction name="separator"/>
+   <addaction name="actionCopy"/>
+   <addaction name="actionCut"/>
+   <addaction name="actionPaste"/>
+   <addaction name="actionUndo"/>
+   <addaction name="actionRedo"/>
+   <addaction name="separator"/>
+   <addaction name="actionFont"/>
+   <addaction name="actionColor"/>
+   <addaction name="separator"/>
+   <addaction name="actionBold"/>
+   <addaction name="actionItalic"/>
+   <addaction name="actionUnderline"/>
+   <addaction name="separator"/>
+   <addaction name="actionLeft"/>
+   <addaction name="actionCenter"/>
+   <addaction name="actionRight"/>
+   <addaction name="actionJustify"/>
+   <addaction name="separator"/>
+   <addaction name="actionTime"/>
+   <addaction name="actionDate"/>
+  </widget>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/new.ico</normaloff>images/new.ico</iconset>
+   </property>
+   <property name="text">
+    <string>New</string>
+   </property>
+   <property name="font">
+    <font/>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/open.ico</normaloff>images/open.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/save.ico</normaloff>images/save.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="font">
+    <font/>
+   </property>
+  </action>
+  <action name="actionSave_As">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/save-as.ico</normaloff>images/save-as.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Save As</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/print.ico</normaloff>images/print.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="actionPrint_Preview">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/print-preview.ico</normaloff>images/print-preview.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Print Preview</string>
+   </property>
+  </action>
+  <action name="actionExport_PDF">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/export.ico</normaloff>images/export.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Export PDF</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/exit.ico</normaloff>images/exit.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/copy.ico</normaloff>images/copy.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Copy</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/cut.ico</normaloff>images/cut.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Cut</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/paste.ico</normaloff>images/paste.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/undo.ico</normaloff>images/undo.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/redo.ico</normaloff>images/redo.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/font.ico</normaloff>images/font.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionColor">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/color.ico</normaloff>images/color.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Color</string>
+   </property>
+  </action>
+  <action name="actionBold">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/Bold.ico</normaloff>images/Bold.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Bold</string>
+   </property>
+  </action>
+  <action name="actionItalic">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/italic.ico</normaloff>images/italic.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Italic</string>
+   </property>
+  </action>
+  <action name="actionUnderline">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/underline.ico</normaloff>images/underline.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Underline</string>
+   </property>
+  </action>
+  <action name="actionLeft">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/left.ico</normaloff>images/left.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Left</string>
+   </property>
+  </action>
+  <action name="actionCenter">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/Center.ico</normaloff>images/Center.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Center</string>
+   </property>
+  </action>
+  <action name="actionRight">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/Right.ico</normaloff>images/Right.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Right</string>
+   </property>
+  </action>
+  <action name="actionJustify">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/Justify.ico</normaloff>images/Justify.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Justify</string>
+   </property>
+  </action>
+  <action name="actionTime">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/time.ico</normaloff>images/time.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Time</string>
+   </property>
+  </action>
+  <action name="actionDate">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/Date.ico</normaloff>images/Date.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Date</string>
+   </property>
+  </action>
+  <action name="actionText_Highlight">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/highlight.ico</normaloff>images/highlight.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Text Highlight</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/about.ico</normaloff>images/about.ico</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/qt.ico</normaloff>images/qt.ico</iconset>
+   </property>
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
