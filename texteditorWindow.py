@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QFileDialog,QMessageBox,QFontDialog,QColorDialog,QLa
 import os
 from PyQt5.QtPrintSupport import QPrinter,QPrintDialog,QPrintPreviewDialog
 from PyQt5.QtCore import QFileInfo,Qt,QTime,QDate,QTimer,QLine
-from PyQt5.QtGui import QFont,QColor
+from PyQt5.QtGui import QFont,QColor,QTextOption, QTextCursor
 from time import sleep
 
 
@@ -16,6 +16,19 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.menuNew.setStyleSheet("QMenu { background-color: #1E1E1E; color:#D4D4D4;} QMenu::item:selected {background-color:#FFFFFF;color:black;border:none;spacing:none;}")
+        self.menuEdit.setStyleSheet("QMenu { background-color: #1E1E1E; color:#D4D4D4;} QMenu::item:selected {background-color:#FFFFFF;color:black;}")
+        self.menuStyle.setStyleSheet("QMenu { background-color: #1E1E1E; color:#D4D4D4;} QMenu::item:selected {background-color:#FFFFFF;color:black;}")
+        self.menuTime_And_Date.setStyleSheet("QMenu { background-color: #1E1E1E; color:#D4D4D4;} QMenu::item:selected {background-color:#FFFFFF;color:black;}")
+        self.menuText_Highlighter.setStyleSheet("QMenu { background-color: #1E1E1E; color:#D4D4D4;} QMenu::item:selected {background-color:#FFFFFF;color:black;}")
+        self.menuHelp.setStyleSheet("QMenu { background-color: #1E1E1E; color:#D4D4D4;} QMenu::item:selected {background-color:#FFFFFF;color:black;}")
+        self.menuFormat.setStyleSheet("QMenu { background-color: #1E1E1E; color:#D4D4D4;} QMenu::item:selected {background-color:#FFFFFF;color:black;}")
+        #self.menubar.setStyleSheet("QMenuBar::item:selected {background-color: #323233; color:#D4D4D4;} QMenuBar {background-color:#252526} QMenuBar::item {background-color: #252526; color:#D4D4D4;}")
+        #self.toolBar.setStyleSheet("QToolBar {background-color:#252526;border-color:#EEEEEE;}")
+        
+        
+    
+        self.textEdit.setWordWrapMode(QTextOption.NoWrap)
         self.actionNew.triggered.connect(self.filenew)
         self.actionOpen.triggered.connect(self.openFile)
         self.actionSave.triggered.connect(self.fileSave)
@@ -53,11 +66,13 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
 
 
     def filenew(self):
+        self.setWindowTitle("Editor")
         self.textEdit.clear()        
 
     def openFile(self):
         openpth = os.path.dirname(__file__)
         filename = QFileDialog.getOpenFileName(self,'Open File',openpth)
+    
         try:
             if filename[0]:
                 f = open(filename[0],'r')
@@ -65,6 +80,7 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
                 with f:
                     data = f.read()
                     self.textEdit.setText(data)
+                    self.setWindowTitle("Editor - "+filename[0])
                     f.close()
         except FileNotFoundError as err:
             pass             
@@ -73,14 +89,16 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
         text = self.textEdit.toPlainText()
         if text == '':
             QMessageBox.critical(self,"No text","Please type something then save a file")
+            return
         try:
         
-            filename = QFileDialog.getSaveFileName(self,'Save File')
+            filename = QFileDialog.getSaveFileName(self,'Save File',None,"Text Document (*.txt) ;; All files (*.*)")
             
             f=open(filename[0],'w')
             with f:           
                 f.write(text)
                 QMessageBox.about(self,"Save File","File Saved Successfully")
+                self.setWindowTitle("Editor - "+filename[0])
                 f.close()
         except FileNotFoundError as err:
             pass     
@@ -107,6 +125,9 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
 
 
     def exportPdf(self):
+        if self.textEdit.toPlainText() == '':
+            QMessageBox.critical(self,"No text","Please type something then export to pdf")
+            return
         fn, _ = QFileDialog.getSaveFileName(self,"Export PDF",None,"PDF files (*.pdf) ;; All files (*.*)")
         if fn != "":
             if QFileInfo(fn).suffix() == "":
@@ -122,19 +143,26 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
 
 
     def copy(self):
-        cursor = self.textEdit.textCursor()
-        textSelect = cursor.selectedText()
-        self.copiedText = textSelect
+        self.textEdit.copy()
+        #cursor = self.textEdit.textCursor()
+        #textSelect = cursor.selectedText()
+        #self.copiedText = textSelect
 
 
     def paste(self):
-        self.textEdit.append(self.copiedText)  
+        #try:
+            #self.textEdit.moveCursor(QTextCursor.End)
+            #self.textEdit.insertPlainText(str(self.copiedText))
+            self.textEdit.paste()
+            #self.textEdit.moveCursor(QTextCursor.End)
+        #except:
+        #    pass    
 
 
     def cut(self):
-        cursor = self.textEdit.textCursor()
-        textSelected = cursor.selectedText()
-        self.copyiedText = textSelected
+        #cursor = self.textEdit.textCursor()
+        #textSelected = cursor.selectedText()
+        #self.copyiedText = textSelected
         self.textEdit.cut()
 
     def fontdialog(self):
@@ -150,12 +178,16 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
     
     def textbold(self):
         global bold
-        if bold == True:
+        if bold:
             #font = QFont().se
             #font.setBold(True)
             self.textEdit.setFontWeight(75)
+            self.actionBold.setCheckable(True)
+            self.actionBold.toggle()
             bold = False
+            
         else:
+            self.actionBold.setCheckable(False)
             # font = QFont()
             # font.setBold(False)
             self.textEdit.setFontWeight(50)
@@ -183,8 +215,11 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
         i = self.textEdit.fontItalic()
         if i == False:
             self.textEdit.setFontItalic(True)
+            self.actionItalic.setCheckable(True)
+            self.actionItalic.toggle()
         elif i == True:
-            self.textEdit.setFontItalic(False)    
+            self.textEdit.setFontItalic(False)   
+            self.actionItalic.setCheckable(False) 
         
 
 
@@ -205,21 +240,45 @@ class EditorWindow(QtWidgets.QMainWindow, Ui_TextEditor):
     def underline(self):
         #global underline
         i = self.textEdit.fontUnderline()
+    
         if i == False:
             self.textEdit.setFontUnderline(True)
+            self.actionUnderline.setCheckable(True)
+            self.actionUnderline.toggle()
         elif i == True:
+            self.actionUnderline.setCheckable(False)
             self.textEdit.setFontUnderline(False)     
 
     def alignLeft(self):
+        self.actionLeft.setCheckable(True)
+        self.actionCenter.setCheckable(False)
+        self.actionRight.setCheckable(False)
+        self.actionJustify.setCheckable(False)
+        self.actionLeft.toggle()
         self.textEdit.setAlignment(Qt.AlignLeft) 
 
     def alignCenter(self):
+        self.actionCenter.setCheckable(True)
+        self.actionLeft.setCheckable(False)
+        self.actionRight.setCheckable(False)
+        self.actionJustify.setCheckable(False)
+        self.actionCenter.toggle()
         self.textEdit.setAlignment(Qt.AlignCenter)
 
     def alignRight(self):
+        self.actionRight.setCheckable(True)
+        self.actionCenter.setCheckable(False)
+        self.actionLeft.setCheckable(False)
+        self.actionJustify.setCheckable(False)
+        self.actionRight.toggle()
         self.textEdit.setAlignment(Qt.AlignRight)
 
     def alignJustify(self):
+        self.actionJustify.setCheckable(True)
+        self.actionRight.setCheckable(False)
+        self.actionCenter.setCheckable(False)
+        self.actionLeft.setCheckable(False)
+        self.actionJustify.toggle()
         self.textEdit.setAlignment(Qt.AlignJustify) 
 
     def showTime(self):
